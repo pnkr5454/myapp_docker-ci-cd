@@ -15,7 +15,7 @@ pipeline{
                 nexusArtifactUploader artifacts: 
                 [[artifactId: 'myweb', 
                 classifier: '', 
-                file: 'myweb-0.0.1-SNAPSHOT.war', 
+                file: 'target/myweb-0.0.1-SNAPSHOT.war', 
                 type: 'war']], 
                 credentialsId: 'Nexus3', 
                 groupId: 'in.javahome', 
