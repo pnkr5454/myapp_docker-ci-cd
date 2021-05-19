@@ -14,7 +14,7 @@ pipeline{
             steps{
                 script{
                     def pom = readMavenPom file: 'pom.xml'
-                    def repository = pom.version.endswith("SNAPSHOT")? 'pnkr5454_snapshot' : 'pnkr5454_release'
+                    def repository = pom.version.endswith("SNAPSHOT") ? 'pnkr5454_snapshot' : 'pnkr5454_release'
                     nexusArtifactUploader artifacts: 
                     [[artifactId: 'myweb', 
                     classifier: '', 
