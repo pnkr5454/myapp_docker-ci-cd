@@ -12,10 +12,11 @@ pipeline{
         }
         stage("upload artifacts to nexus repository"){
             steps{
+                def pom = readMavenPom file: 'pom.xml'
                 nexusArtifactUploader artifacts: 
                 [[artifactId: 'myweb', 
                 classifier: '', 
-                file: 'target/myweb-0.0.1-SNAPSHOT.war', 
+                file: "target/myweb-${pom.version}.war", 
                 type: 'war']], 
                 credentialsId: 'Nexus3', 
                 groupId: 'in.javahome', 
@@ -23,7 +24,7 @@ pipeline{
                 nexusVersion: 'nexus3', 
                 protocol: 'http', 
                 repository: 'pnkr5454_snapshot',
-                version: '0.0.1-SNAPSHOT'
+                version: pom.version
             }
         }
     }
