@@ -31,5 +31,13 @@ pipeline{
                 
             }
         }
+        stage("download artifacts from nexus repository"){
+            steps{
+                sh "curl -u admin:Malleswari@4343 -L -X GET 
+                "http://3.91.174.181:8081/service/rest/v1/search/assets/download?
+                sort=version&repository=pnkr5454_release&maven.groupId=in.javahome&
+                maven.artifactId=myweb&maven.extension=war" -H "accept: application/json" -o myweb.wa"
+            }
+        }
     }
 }
