@@ -33,7 +33,7 @@ pipeline{
         }
         stage("download artifacts from nexus repository"){
             steps{
-                sh"sudo curl -u admin:Malleswari@4343 -L -X GET "http://172.31.3.30:8081/service/rest/v1/search/assets/download?sort=version&repository=pnkr5454_release&maven.groupId=in.javahome&maven.artifactId=myweb&maven.extension=war" -H "accept: application/json" -o myweb.war"
+                sh"curl -u admin:Malleswari@4343 -L -X GET "http://172.31.3.30:8081/service/rest/v1/search/assets/download?sort=version&repository=pnkr5454_release&maven.groupId=in.javahome&maven.artifactId=myweb&maven.extension=war" -H "accept: application/json" -o myweb.war"
             }
         }
     }
