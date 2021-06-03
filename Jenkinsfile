@@ -12,7 +12,7 @@ pipeline{
         }
         stage("build the docker image"){
             steps{
-                sh"docker build -t pnkr5454/myapp2021:v1 ."
+                sh"docker build -t pnkr5454/myapp2021:${getlatestcommitid() ."
                 
             }
         }
@@ -20,7 +20,7 @@ pipeline{
             steps{
                 withCredentials([string(credentialsId: 'docker_pswd', variable: 'docker_hub')]){
                 sh"docker login -u pnkr5454 -p ${docker_hub}"
-                sh"docker push pnkr5454/myapp2021:v1"
+                sh"docker push pnkr5454/myapp2021:${getlatestcommitid()"
                 }
             }
         }
@@ -28,9 +28,13 @@ pipeline{
             steps{
                 sshagent(['docker_hub']) {
                     sh"ssh -o StrictHostKeyChecking=no ec2-user@172.31.94.70 docker rm -f mywebapp "
-                sh"ssh -o StrictHostKeyChecking=no ec2-user@172.31.94.70 docker run -d -p 8080:8080 --name mywebapp pnkr5454/myapp2021:v1 "
+                sh"ssh -o StrictHostKeyChecking=no ec2-user@172.31.94.70 docker run -d -p 8080:8080 --name mywebapp pnkr5454/myapp2021:${getlatestcommitid()} "
                  } 
             }
         }
     }
+}
+def getlatestcommitid(){
+    def commitid =sh returnStdout: true, script: 'git rev-parse --short HEAD'
+    return =commitid
 }
