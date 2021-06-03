@@ -16,5 +16,13 @@ pipeline{
                 
             }
         }
+          stage("push docker image to docker hub"){
+            steps{
+                withCredentials([string(credentialsId: 'docker_pswd', variable: 'docker_hub')]){
+                sh"docker login -u pnkr5454 -p ${docker_hub}"
+                sh"docker push pnkr5454/myapp2021:v1"
+                }
+            }
+        }
     }
 }
