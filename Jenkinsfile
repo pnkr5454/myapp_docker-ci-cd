@@ -24,5 +24,12 @@ pipeline{
                 }
             }
         }
+        stage("pull the image and deploy to tomcat"){
+            steps{
+                sshagent(['docker_hub']) {
+                sh"ssh ec2-user@172.31.94.70 docker run -d -p 8080:8080 pnkr5454/myapp2021:v1 "
+                 } 
+            }
+        }
     }
 }
