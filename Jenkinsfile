@@ -10,9 +10,9 @@ pipeline{
                 sh "mvn clean package"
             }
         }
-        stage("upload artifacts to nexus repository"){
+        stage("build the docker image"){
             steps{
-                echo"succes"
+                sh"docker build -t pnkr5454/myapp2021:v1 ."
                 
             }
         }
