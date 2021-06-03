@@ -12,7 +12,7 @@ pipeline{
         }
         stage("build the docker image"){
             steps{
-                sh"docker build -t pnkr5454/myapp2021:${getlatestcommitid() ."
+                sh"docker build -t  . pnkr5454/myapp2021:${getlatestcommitid()"
                 
             }
         }
